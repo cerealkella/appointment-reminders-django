@@ -1,4 +1,4 @@
-"""example_apscheduler URL Configuration
+"""schedulers URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -21,6 +21,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
 
-import example_apscheduler.jobs  # NOQA @isort:skip
+import schedulers.jobs  # NOQA @isort:skip
 import logging
 logging.basicConfig(level="DEBUG")
