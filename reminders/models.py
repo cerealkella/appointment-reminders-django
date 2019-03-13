@@ -16,7 +16,17 @@ class Appointment(models.Model):
     name = models.CharField(max_length=150)
     phone_number = models.CharField(max_length=15)
     time = models.DateTimeField()
-    time_zone = TimeZoneField(default='UTC')
+    time_zone = TimeZoneField(default='US/Central')
+
+    comm_pref = models.CharField(max_length=1)
+    email = models.CharField(max_length=60, blank=True)
+    home_phone = models.CharField(max_length=15, blank=True)
+    
+    reminder_days = models.IntegerField(default=1)
+    emr_id = models.IntegerField(default=0)
+    profile_id = models.IntegerField(default=0)
+    reminder_sent = models.DateTimeField(null=True)
+
 
     # Additional fields not visible to users
     task_id = models.CharField(max_length=50, blank=True, editable=False)
@@ -43,14 +53,15 @@ class Appointment(models.Model):
 
         # Calculate the correct time to send this reminder
         appointment_time = arrow.get(self.time, self.time_zone.zone)
-        reminder_time = appointment_time.shift(minutes=-30)
+        # reminder_time = appointment_time.shift(minutes=-30)
+        reminder_time = appointment_time.shift(days=-self.reminder_days)
         now = arrow.now(self.time_zone.zone)
         milli_to_wait = int(
             (reminder_time - now).total_seconds()) * 1000
 
         # Schedule the Dramatiq task
-        from .tasks import send_sms_reminder
-        result = send_sms_reminder.send_with_options(
+        from .tasks import send_reminder
+        result = send_reminder.send_with_options(
             args=(self.pk,),
             delay=milli_to_wait)
 

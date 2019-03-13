@@ -12,3 +12,7 @@ urlpatterns = [
     # Include the Django admin
     re_path(r'^admin/', admin.site.urls),
 ]
+
+import schedulers.jobs  # NOQA @isort:skip
+import logging
+logging.basicConfig(level="DEBUG")
