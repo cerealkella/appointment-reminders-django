@@ -151,3 +151,7 @@ SCHEDULER_CONFIG = {
     },
 }
 SCHEDULER_AUTOSTART = True
+
+# my_project/settings.py
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
