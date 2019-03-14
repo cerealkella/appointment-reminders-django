@@ -7,6 +7,10 @@ venv
 # Staticfiles
 appointments/staticfiles
 
+# Django Project Local Settings
+appointments/settings/local.py
+reminders/migrations
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

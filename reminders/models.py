@@ -25,8 +25,6 @@ class Appointment(models.Model):
     reminder_days = models.IntegerField(default=1)
     emr_id = models.IntegerField(default=0)
     profile_id = models.IntegerField(default=0)
-    reminder_sent = models.DateTimeField(null=True)
-
 
     # Additional fields not visible to users
     task_id = models.CharField(max_length=50, blank=True, editable=False)
