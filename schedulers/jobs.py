@@ -49,7 +49,7 @@ def dictfetchall(days_in_advance):
     ]
 
 
-@register_job(scheduler, "interval", seconds=30, replace_existing=True)
+@register_job(scheduler, "interval", minutes=45, replace_existing=True)
 def populate_appt_database():
     """Specify the days in advance to send out reminders"""
     reminders = (1, 3)

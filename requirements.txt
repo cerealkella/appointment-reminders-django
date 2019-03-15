@@ -26,3 +26,6 @@ coverage==4.5.2
 mock==2.0.0
 model-mommy==1.6.0
 six==1.11.0
+
+# Django APScheduler
+django-apscheduler

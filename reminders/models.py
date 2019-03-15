@@ -14,11 +14,11 @@ import arrow
 @python_2_unicode_compatible
 class Appointment(models.Model):
     name = models.CharField(max_length=150)
-    phone_number = models.CharField(max_length=15)
+    phone_number = models.CharField(max_length=15, blank=True)
     time = models.DateTimeField()
     time_zone = TimeZoneField(default='US/Central')
 
-    comm_pref = models.CharField(max_length=1)
+    comm_pref = models.CharField(max_length=1, blank=True, default='')
     email = models.CharField(max_length=60, blank=True)
     home_phone = models.CharField(max_length=15, blank=True)
     
@@ -51,7 +51,7 @@ class Appointment(models.Model):
 
         # Calculate the correct time to send this reminder
         appointment_time = arrow.get(self.time, self.time_zone.zone)
-        # reminder_time = appointment_time.shift(minutes=-30)
+        # reminder_time = appointment_time.shift(minutes=-30)       
         reminder_time = appointment_time.shift(days=-self.reminder_days)
         now = arrow.now(self.time_zone.zone)
         milli_to_wait = int(
