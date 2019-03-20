@@ -3,6 +3,8 @@ from django.conf.urls import re_path
 from django.contrib import admin
 from django.urls import path
 from django.views.generic import TemplateView
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     re_path(r'^$',
@@ -13,7 +15,7 @@ urlpatterns = [
     # Include the Django admin
     re_path(r'^admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 import schedulers.jobs  # NOQA @isort:skip
 import logging

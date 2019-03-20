@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Pause length="3"/>
+  <Say voice="alice">... 
+  Hello {{ appointment.name }}! This is MCMC calling to remind you of your appointment coming up on {{ appointment.time }}
+  If you are unable to make it, please call 836-6111 to reschedule. Thank you!
+  </Say>
+</Response>
