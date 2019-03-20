@@ -34,5 +34,7 @@ EMAIL_SERVER_SETTINGS = {
 
 ORGANIZATION = {
     'NAME': 'ACME, Inc',
-    'PHONE': '555-867-5309'
+    'PHONE': '555-867-5309',
+    'WEB_RESOURCE': 'https://www.acme.inc/billing-insurance/',
+    'SITE_BASE_URL': 'acme.inc',
 }

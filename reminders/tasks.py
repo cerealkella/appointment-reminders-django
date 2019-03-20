@@ -70,24 +70,10 @@ def _send_email_reminder(appointment, body):
 
 def _make_phone_call(appointment, body):
     """Send a voice reminder to a phone using Twilio"""
-    xml = """<?xml version="1.0" encoding="UTF-8"?>
-    <Response>
-        <Say voice="alice">{0}</Say>
-    </Response>""".format(body)
-    from django.conf import settings as django_settings
     
-    print(django_settings.MEDIA_ROOT)
-    print(django_settings.MEDIA_URL)
-    file = open(django_settings.MEDIA_ROOT+'/{0}.xml'.format(appointment.task_id),'w')
-    file.write(xml)
-    print(xml)
-    file.close()
     client = Client()
     call = client.calls.create(
-                        #url='http://5ac30d45.ngrok.io/media/{0}.xml'.format(appointment.task_id),
-                        #url='https://5ac30d45.ngrok.io/media/ed.xml',
-                        
-                        url='https://5ac30d45.ngrok.io/appointments/xml/{}/'.format(appointment.id),
+                        url= ORGANIZATION['SITE_BASE_URL'] + 'appointments/xml/{}/'.format(appointment.id),
                         to=appointment.home_phone,
                         from_=settings.TWILIO_NUMBER,
                     )
