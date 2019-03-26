@@ -17,6 +17,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-import schedulers.jobs  # NOQA @isort:skip
+# import schedulers.jobs  # NOQA @isort:skip
 import logging
 logging.basicConfig(level="DEBUG")

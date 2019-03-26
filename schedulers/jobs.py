@@ -1,13 +1,11 @@
 import random
 import time
 import datetime
-
 from apscheduler.schedulers.background import BackgroundScheduler
 from django.utils import timezone
 from django.db import connections
 from django_apscheduler.jobstores import DjangoJobStore, register_events, register_job
 from reminders.models import Appointment, ValidationError
-# from appointments.settings.local import EMAIL_SERVER_SETTINGS, ORGANIZATION
 
 
 scheduler = BackgroundScheduler()
@@ -20,7 +18,7 @@ def dictfetchall(days_in_advance):
     SELECT DISTINCT profile.prof_c_profilenum as profile_id,
                     prof_c_ip1firstname as name,
                     /*sch5event_contact_cell_phone as phone_number,*/
-                    '5555555555' as phone_number,
+                    '2013814330' as phone_number,
                     'E' as comm_pref,
                     /*prof_c_commpref as comm_pref,*/
                     '5555555555' as home_phone,
@@ -34,8 +32,7 @@ def dictfetchall(days_in_advance):
              ON sch5appt_eventid = sch5event_id
            JOIN profile
              ON prof_c_profilenum = sch5event_profile
-    WHERE  prof_c_commpref <> '' and
-            Date(sch5appt_datetime) = {}
+    WHERE  Date(sch5appt_datetime) = {}
     ORDER  BY sch5appt_datetime
     '''
     appt_date = str(datetime.date.today() +
@@ -49,7 +46,7 @@ def dictfetchall(days_in_advance):
     ]
 
 
-@register_job(scheduler, "interval", minutes=45, replace_existing=True)
+@register_job(scheduler, "interval", minutes=5, replace_existing=True)
 def populate_appt_database():
     """Specify the days in advance to send out reminders"""
     reminders = (1, 3)
@@ -78,16 +75,6 @@ def populate_appt_database():
                     a.save()
 
 
-'''
-# default test job from example
-def test_job():
-    time.sleep(random.randrange(1, 100, 1)/100.)
-    print("I'm a test job!")
-    # raise ValueError("Olala!")
-'''
-
-
 register_events(scheduler)
-
 scheduler.start()
-print("Scheduler started!")
+print("{} - Scheduler started!".format(datetime.datetime.now()))
