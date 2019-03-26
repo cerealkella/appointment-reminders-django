@@ -57,7 +57,7 @@ def populate_appt_database():
         for r in rows:
             appt = Appointment.objects.all()
             if appt.filter(emr_id=r['id'], reminder_days=i):
-                print("{0}-day appointment reminder already exists for id ".format(i, r['id']))
+                print("{0}-day appointment reminder already exists for id {1}".format(i, r['id']))
             else:
                 a = Appointment(profile_id=r['profile_id'],
                                 emr_id=r['id'],
