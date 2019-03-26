@@ -46,7 +46,8 @@ def dictfetchall(days_in_advance):
     ]
 
 
-@register_job(scheduler, "interval", minutes=5, replace_existing=True)
+# Schedule at random intervals because rundramatiq and django each spawn this
+@register_job(scheduler, "interval", seconds=random.randint(90, 1200), replace_existing=True)
 def populate_appt_database():
     """Specify the days in advance to send out reminders"""
     reminders = (1, 3)
