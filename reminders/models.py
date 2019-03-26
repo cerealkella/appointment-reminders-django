@@ -9,6 +9,7 @@ from django.utils.encoding import python_2_unicode_compatible
 from timezone_field import TimeZoneField
 
 import arrow
+import random
 
 
 @python_2_unicode_compatible
@@ -51,8 +52,10 @@ class Appointment(models.Model):
 
         # Calculate the correct time to send this reminder
         appointment_time = arrow.get(self.time, self.time_zone.zone)
-        # reminder_time = appointment_time.shift(minutes=-30)       
         reminder_time = appointment_time.shift(days=-self.reminder_days)
+        # add random number of seconds to wait to space reminders out a bit
+        jitter = random.randint(1, 121)
+        reminder_time = reminder_time.shift(seconds=jitter)
         now = arrow.now(self.time_zone.zone)
         milli_to_wait = int(
             (reminder_time - now).total_seconds()) * 1000
