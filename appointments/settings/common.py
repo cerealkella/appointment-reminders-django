@@ -40,7 +40,6 @@ DRAMATIQ_BROKER = {
         "django_dramatiq.middleware.AdminMiddleware",
         "django_dramatiq.middleware.DbConnectionsMiddleware",
     ],
-    "LOAD_APSCHEDULER": True,
 }
 
 # Reminder time: how early text messages are sent in advance of appointments
