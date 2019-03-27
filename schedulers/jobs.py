@@ -1,4 +1,3 @@
-import random
 import time
 import datetime
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -10,7 +9,6 @@ from reminders.models import Appointment, ValidationError
 
 scheduler = BackgroundScheduler()
 scheduler.add_jobstore(DjangoJobStore(), "default")
-RANDOM_INTERVAL = random.randint(90, 1200)
 
 
 def dictfetchall(days_in_advance):
@@ -47,7 +45,7 @@ def dictfetchall(days_in_advance):
     ]
 
 
-@register_job(scheduler, "interval", seconds=RANDOM_INTERVAL, replace_existing=True)
+@register_job(scheduler, "interval", minutes=5, replace_existing=True)
 def populate_appt_database():
     """Specify the days in advance to send out reminders"""
     reminders = (1, 3)
@@ -78,4 +76,4 @@ def populate_appt_database():
 
 register_events(scheduler)
 scheduler.start()
-print("{0} - Scheduler started! Running every {1} seconds".format(datetime.datetime.now(), RANDOM_INTERVAL))
+print("{0} - Scheduler started!".format(datetime.datetime.now()))
