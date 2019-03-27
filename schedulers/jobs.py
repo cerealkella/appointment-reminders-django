@@ -74,6 +74,7 @@ def populate_appt_database():
                     a.save()
 
 
-register_events(scheduler)
-scheduler.start()
-print("{0} - Scheduler started!".format(datetime.datetime.now()))
+def start_scheduler():
+    register_events(scheduler)
+    scheduler.start()
+    print("{0} - Scheduler started!".format(datetime.datetime.now()))
