@@ -8,5 +8,6 @@ from .local import *  # noqa
 # Use DEBUG for local development
 DEBUG = True
 
-# Override Autostart to not run APScheduler
-SCHEDULER_AUTOSTART = False
+# Override Broker to not run APScheduler
+# SCHEDULER_AUTOSTART = False
+DRAMATIQ_BROKER["LOAD_APSCHEDULER"] = False

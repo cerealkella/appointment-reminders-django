@@ -19,7 +19,7 @@ urlpatterns = [
 
 
 # Only run if Dramatiq is set to Autostart
-if settings.SCHEDULER_AUTOSTART:
+if settings.DRAMATIQ_BROKER["LOAD_APSCHEDULER"] == True:
     from schedulers.jobs import start_scheduler
     print("Starting Scheduler from urls.py")
     start_scheduler()

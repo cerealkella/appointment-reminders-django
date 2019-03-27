@@ -39,7 +39,8 @@ DRAMATIQ_BROKER = {
         "dramatiq.middleware.Retries",
         "django_dramatiq.middleware.AdminMiddleware",
         "django_dramatiq.middleware.DbConnectionsMiddleware",
-    ]
+    ],
+    "LOAD_APSCHEDULER": True,
 }
 
 # Reminder time: how early text messages are sent in advance of appointments
@@ -150,7 +151,7 @@ SCHEDULER_CONFIG = {
         "type": "threadpool"
     },
 }
-SCHEDULER_AUTOSTART = True
+SCHEDULER_AUTOSTART = False
 
 # my_project/settings.py
 LOGIN_REDIRECT_URL = '/'
