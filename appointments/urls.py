@@ -20,8 +20,7 @@ urlpatterns = [
 
 # Only run if Dramatiq is set to Autostart
 if settings.SCHEDULER_AUTOSTART:
-    from schedulers.jobs import start_scheduler
+    import schedulers.jobs
     print("Starting Scheduler from urls.py")
-    start_scheduler()
 import logging
 logging.basicConfig(level="DEBUG")
