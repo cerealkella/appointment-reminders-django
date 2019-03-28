@@ -1,5 +1,7 @@
 import time
 import datetime
+import sys
+import socket
 from apscheduler.schedulers.background import BackgroundScheduler
 from django.utils import timezone
 from django.db import connections
@@ -14,6 +16,8 @@ When using with gunicorn - it's essential to launch gunicorn
 with the --preload flag. This will prevent APScheduler from
 launching in multiple threads. See stackoverflow for explanation:
 https://stackoverflow.com/questions/16053364/make-sure-only-one-worker-launches-the-apscheduler-event-in-a-pyramid-web-app-ru
+Also employing the use of a socket to ensure multiple instances of
+APScheduler are not launched
 '''
 scheduler = BackgroundScheduler()
 scheduler.add_jobstore(DjangoJobStore(), "default")
@@ -82,6 +86,13 @@ def populate_appt_database():
                     a.save()
 
 
-register_events(scheduler)
-scheduler.start()
-print("{0} - Scheduler started!".format(datetime.datetime.now()))
+
+try:
+    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    sock.bind(("127.0.0.1", 47200))
+except socket.error:
+    print("!!!scheduler already started, DO NOTHING")
+else:
+    register_events(scheduler)
+    scheduler.start()
+    print("{0} - Scheduler started!".format(datetime.datetime.now()))
