@@ -150,7 +150,7 @@ SCHEDULER_CONFIG = {
         "type": "threadpool"
     },
 }
-SCHEDULER_AUTOSTART = False
+SCHEDULER_AUTOSTART = True
 
 # my_project/settings.py
 LOGIN_REDIRECT_URL = '/'

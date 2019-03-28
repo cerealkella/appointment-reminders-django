@@ -7,10 +7,6 @@ from django_apscheduler.jobstores import DjangoJobStore, register_events, regist
 from reminders.models import Appointment, ValidationError
 
 
-scheduler = BackgroundScheduler()
-scheduler.add_jobstore(DjangoJobStore(), "default")
-
-
 def dictfetchall(days_in_advance):
     "Return all rows from a cursor as a dict"
     sql = '''
@@ -75,6 +71,16 @@ def populate_appt_database():
 
 
 def start_scheduler():
+    '''
+    Launch APScheduler
+    Call this from models or urls
+    When using with gunicorn - it's essential to launch gunicorn
+    with the --preload flag. This will prevent APScheduler from
+    launching in multiple threads. See stackoverflow for explanation:
+    https://stackoverflow.com/questions/16053364/make-sure-only-one-worker-launches-the-apscheduler-event-in-a-pyramid-web-app-ru
+    '''
+    scheduler = BackgroundScheduler()
+    scheduler.add_jobstore(DjangoJobStore(), "default")
     register_events(scheduler)
     scheduler.start()
     print("{0} - Scheduler started!".format(datetime.datetime.now()))
