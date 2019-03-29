@@ -55,14 +55,14 @@ class Appointment(models.Model):
         reminder_time = appointment_time.shift(days=-self.reminder_days)
         # Let's not wake people up, don't send reminders before 9am
         if reminder_time.hour < 9:
-            reminder_time = reminder_time.shift(minutes=3)
-        # add random number of seconds to wait to space reminders out a bit
-        jitter = random.randint(1, 121)
-        reminder_time = reminder_time.shift(seconds=jitter)
+            reminder_time = reminder_time.shift(hours=2)
+        # reminder_time = reminder_time.shift(seconds=jitter)
         print(reminder_time)
+        # add random number of millseconds to wait to space reminders out a bit
+        jitter = random.randint(-300000, 300000)
         now = arrow.now(self.time_zone.zone)
         milli_to_wait = int(
-            (reminder_time - now).total_seconds()) * 1000
+            ((reminder_time - now).total_seconds()) * 1000) + jitter
 
         # Schedule the Dramatiq task
         from .tasks import send_reminder

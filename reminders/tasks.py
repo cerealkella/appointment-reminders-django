@@ -81,7 +81,7 @@ def _make_phone_call(appointment, body):
     return call.sid
 
 
-@dramatiq.actor
+@dramatiq.actor(max_retries=5, min_backoff=20000, max_backoff=21600000)
 def send_reminder(appointment_id):
     """Send a reminder!"""
     # Get our appointment from the database
