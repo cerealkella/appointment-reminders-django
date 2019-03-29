@@ -40,7 +40,8 @@ class Appointment(models.Model):
     def clean(self):
         """Checks that appointments are not scheduled in the past"""
 
-        appointment_time = arrow.get(self.time, self.time_zone.zone)
+        utcappt = arrow.get(self.time)
+        appointment_time = utcappt.to(self.time_zone)
 
         if appointment_time < arrow.utcnow():
             raise ValidationError(
@@ -51,12 +52,12 @@ class Appointment(models.Model):
         """Schedule a Dramatiq task to send a reminder for this appointment"""
 
         # Calculate the correct time to send this reminder
-        appointment_time = arrow.get(self.time, self.time_zone.zone)
+        utcappt = arrow.get(self.time)
+        appointment_time = utcappt.to(self.time_zone)
         reminder_time = appointment_time.shift(days=-self.reminder_days)
         # Let's not wake people up, don't send reminders before 9am
         if reminder_time.hour < 9:
             reminder_time = reminder_time.shift(hours=2)
-        # reminder_time = reminder_time.shift(seconds=jitter)
         print(reminder_time)
         # add random number of millseconds to wait to space reminders out a bit
         jitter = random.randint(-300000, 300000)
