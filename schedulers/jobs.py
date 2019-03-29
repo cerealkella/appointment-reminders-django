@@ -35,7 +35,7 @@ def dictfetchall(days_in_advance):
                     '5555555555' as home_phone,
     				/*profile.prof_c_arpphone as home_phone,*/
     				/*profile.prof_c_ip1p_email as email,*/
-                    'apptreminder@mailinator.com' as email,
+                    'apptreminders@mailinator.com' as email,
                     sch5event_id as id,
                     sch5appt_datetime as time
     FROM   scheduling_appointment
