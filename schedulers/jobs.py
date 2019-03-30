@@ -4,7 +4,8 @@ import sys
 import socket
 from apscheduler.schedulers.background import BackgroundScheduler
 from django.utils import timezone
-from django.db import connections
+from django.db import connections, connection
+from django.db.utils import InterfaceError
 from django_apscheduler.jobstores import DjangoJobStore, register_events, register_job
 from reminders.models import Appointment, ValidationError
 
@@ -48,7 +49,11 @@ def dictfetchall(days_in_advance):
     '''
     appt_date = str(datetime.date.today() +
                     datetime.timedelta(days=days_in_advance))
-    cursor = connections['emr'].cursor()
+    try:
+        cursor = connections['emr'].cursor()
+    except InterfaceError:
+        connection.close()
+        cursor = connections['emr'].cursor()
     cursor.execute(sql.format("'" + appt_date + "'"))
     columns = [col[0] for col in cursor.description]
     return [
