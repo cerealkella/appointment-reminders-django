@@ -63,7 +63,7 @@ def dictfetchall(days_in_advance):
     ]
 
 
-@register_job(scheduler, "interval", minutes=15, replace_existing=True)
+@register_job(scheduler, "cron", hour='9,11,13,15,17', minute=20, replace_existing=True, jitter=20)
 def populate_appt_database():
     """Specify the days in advance to send out reminders"""
     reminders = (1, 3)
@@ -73,7 +73,8 @@ def populate_appt_database():
         for r in rows:
             appt = Appointment.objects.all()
             if appt.filter(emr_id=r['id'], reminder_days=i):
-                print("{0}-day appointment reminder already exists for id {1}".format(i, r['id']))
+                # print("{0}-day appointment reminder already exists for id {1}".format(i, r['id']))
+                pass
             else:
                 a = Appointment(profile_id=r['profile_id'],
                                 emr_id=r['id'],
