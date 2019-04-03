@@ -51,16 +51,16 @@ def dictfetchall(days_in_advance):
                     datetime.timedelta(days=days_in_advance))
     try:
         cursor = connections['emr'].cursor()
+        cursor.execute(sql.format("'" + appt_date + "'"))
+        columns = [col[0] for col in cursor.description]
+        return [
+            dict(zip(columns, row))
+            for row in cursor.fetchall()
+        ]
     except (InterfaceError, OperationalError) as e:
         connection.close()
         print("{} - Connection unavailable, will try again later".format(e))
         return {}
-    cursor.execute(sql.format("'" + appt_date + "'"))
-    columns = [col[0] for col in cursor.description]
-    return [
-        dict(zip(columns, row))
-        for row in cursor.fetchall()
-    ]
 
 
 @register_job(scheduler, "cron", hour='9,11,13,15,17', minute=20, replace_existing=True, jitter=20)
