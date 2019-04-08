@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Pause length="3"/>
-  <Say loop="2" voice="alice">... 
-  Hello {{ appointment.name }}! This is MCMC calling to remind you of your appointment coming up on {{ appointment.time }}
-  If you are unable to make it, please call 836-6111 to reschedule. Thank you!
-  </Say>
+  {% load staticfiles %}
+  <Pause length="5"/>
+  <Say voice="alice"> . </Say>
+  <Play>{% static 'hello-from-mcmc.wav' %}</Play>
+  <Say voice="alice"> {{ appointment.name }} </Say>
+  <Play>{% static 'has-an-appointment.wav' %}</Play>
+  <Say voice="alice"> on {{ appointment.time }} </Say>
+  <Play>{% static 'to-reschedule.wav' %}</Play>
+  <Say voice="alice"> Again - {{ appointment.name }} </Say>
+  <Play>{% static 'has-an-appointment.wav' %}</Play>
+  <Say voice="alice"> on {{ appointment.time }} </Say>
+  <Play>{% static 'to-reschedule.wav' %}</Play>
 </Response>

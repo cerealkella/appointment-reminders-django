@@ -5,7 +5,7 @@
 venv
 
 # Staticfiles
-appointments/staticfiles
+# appointments/staticfiles
 
 # Django Project Local Settings
 appointments/settings/local.py
