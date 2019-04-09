@@ -13,6 +13,7 @@ class AppointmentListView(ListView):
     """Shows users a list of appointments"""
 
     model = Appointment
+    ordering = ['-id']
 
 
 class AppointmentDetailView(DetailView):
@@ -25,20 +26,37 @@ class AppointmentCreateView(SuccessMessageMixin, CreateView):
     """Powers a form to create a new appointment"""
 
     model = Appointment
-    fields = ['name', 'phone_number', 'home_phone', 'time', 'time_zone', 'comm_pref', 'email', 'reminder_days']
-    success_message = 'Appointment successfully created.'
+    fields = [
+        "name",
+        "phone_number",
+        "home_phone",
+        "time",
+        "time_zone",
+        "comm_pref",
+        "email",
+        "reminder_days",
+    ]
+    success_message = "Appointment successfully created."
 
 
 class AppointmentUpdateView(SuccessMessageMixin, UpdateView):
     """Powers a form to edit existing appointments"""
 
     model = Appointment
-    fields = ['name', 'phone_number', 'home_phone', 'time', 'time_zone', 'comm_pref', 'email']
-    success_message = 'Appointment successfully updated.'
+    fields = [
+        "name",
+        "phone_number",
+        "home_phone",
+        "time",
+        "time_zone",
+        "comm_pref",
+        "email",
+    ]
+    success_message = "Appointment successfully updated."
 
 
 class AppointmentDeleteView(DeleteView):
     """Prompts users to confirm deletion of an appointment"""
 
     model = Appointment
-    success_url = reverse_lazy('list_appointments')
+    success_url = reverse_lazy("list_appointments")

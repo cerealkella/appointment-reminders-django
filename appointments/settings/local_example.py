@@ -37,4 +37,7 @@ ORGANIZATION = {
     'PHONE': '555-867-5309',
     'WEB_RESOURCE': 'https://www.acme.inc/billing-insurance/',
     'SITE_BASE_URL': 'acme.inc',
+    'TEST_CELL_NUMBER': '5556667777',
+    'TEST_HOME_PHONE': '5555555555',
+    'TEST_EMAIL': 'appts@mailinator.com',
 }

@@ -19,9 +19,10 @@
           <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Phone number</th>
+            <th>Cell Phone</th>
+            <th>Home Phone</th>
+            <th>Email</th>
             <th>Time</th>
-            <th>Created at</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -31,8 +32,9 @@
               <td><a href="{{ appointment.get_absolute_url }}">{{ appointment.pk }}</a></td>
               <td>{{ appointment.name }}</td>
               <td>{{ appointment.phone_number }}</td>
+              <td>{{ appointment.home_phone }}</td>
+              <td>{{ appointment.email }}</td>
               <td>{{ appointment.time }}</td>
-              <td>{{ appointment.created }}</td>
               <td>
                 <a class="btn btn-default btn-xs" href="{% url 'edit_appointment' appointment.pk %}">Edit</a>
                 <a class="btn btn-xs btn-danger" href="{% url 'delete_appointment' appointment.pk %}">Delete</a>
