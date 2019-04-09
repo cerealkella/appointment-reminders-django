@@ -29,14 +29,11 @@ def dictfetchall(days_in_advance):
     sql = """
     SELECT DISTINCT profile.prof_c_profilenum as profile_id,
                     prof_c_ip1firstname as name,
-                    /*sch5event_contact_cell_phone as phone_number,*/
-                    '2013814330' as phone_number,
+                    sch5event_contact_cell_phone as phone_number,
                     'E' as comm_pref,
                     /*prof_c_commpref as comm_pref,*/
-                    '5555555555' as home_phone,
-    				/*profile.prof_c_arpphone as home_phone,*/
-    				/*profile.prof_c_ip1p_email as email,*/
-                    'apptreminders@mailinator.com' as email,
+                    profile.prof_c_arpphone as home_phone,
+    				profile.prof_c_ip1p_email as email,
                     sch5event_id as id,
                     sch5appt_datetime as time
     FROM   scheduling_appointment
