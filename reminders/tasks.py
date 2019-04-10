@@ -76,7 +76,7 @@ def _send_email_reminder(appointment, body):
     return result
 
 
-def _make_phone_call(appointment, body):
+def _make_phone_call(appointment):
     """Send a voice reminder to a phone using Twilio"""
 
     client = Client()
@@ -85,7 +85,9 @@ def _make_phone_call(appointment, body):
         + "appointments/xml/{}/".format(appointment.id),
         # to=appointment.home_phone,
         to=ORGANIZATION["TEST_HOME_PHONE"],
-        from_=settings.TWILIO_NUMBER,
+        # Outbound Caller ID, if different than TWILIO #, must be verified w/twilio
+        # from_=settings.TWILIO_NUMBER,
+        from_=ORGANIZATION['PHONE']
     )
     print(call.sid)
     return call.sid
