@@ -137,7 +137,7 @@ def send_reminder(appointment_id):
             _send_email_reminder(appointment, body)
             return True
         elif _valid_home_phone(appointment):
-            _make_phone_call(appointment, body)
+            _make_phone_call(appointment)
             return True
         return False
 
