@@ -7,7 +7,13 @@
   <Play>https://{{ request.get_host }}{% static 'has-an-appointment.mp3' %}</Play>
   <Say voice="alice"> on {{ appointment.time }} </Say>
   <Play>https://{{ request.get_host }}{% static 'to-reschedule.mp3' %}</Play>
+  <Pause length="1"/>
   <Say voice="alice"> Again - {{ appointment.name }} </Say>
+  <Play>https://{{ request.get_host }}{% static 'has-an-appointment.mp3' %}</Play>
+  <Say voice="alice"> on {{ appointment.time }} </Say>
+  <Play>https://{{ request.get_host }}{% static 'to-reschedule.mp3' %}</Play>
+  <Pause length="1"/>
+  <Say voice="alice"> {{ appointment.name }} </Say>
   <Play>https://{{ request.get_host }}{% static 'has-an-appointment.mp3' %}</Play>
   <Say voice="alice"> on {{ appointment.time }} </Say>
   <Play>https://{{ request.get_host }}{% static 'to-reschedule.mp3' %}</Play>
