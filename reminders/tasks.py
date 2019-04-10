@@ -156,6 +156,6 @@ def send_reminder(appointment_id):
 
     else:  # appointment.comm_pref == 'P'
         if _valid_home_phone(appointment):
-            _make_phone_call(appointment, body)
+            _make_phone_call(appointment)
             return True
         return False
