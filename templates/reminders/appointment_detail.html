@@ -12,12 +12,20 @@
       <dl class="dl-horizontal">
         <dt><strong>Name:</strong></dt>
         <dd>{{ appointment.name }}</dd>
-        <dt><strong>Phone number:</strong></dt>
+        <dt><strong>Cell Phone:</strong></dt>
         <dd>{{ appointment.phone_number }}</dd>
+        <dt><strong>Home Phone:</strong></dt>
+        <dd>{{ appointment.home_phone }}</dd>
+        <dt><strong>Email:</strong></dt>
+        <dd>{{ appointment.email }}</dd>
         <dt><strong>Time:</strong></dt>
         <dd>{{ appointment.time }}</dd>
-        <dt><strong>Time zone:</strong></dt>
-        <dd>{{ appointment.time_zone }}</dd>
+        <dt><strong>Appointment ID:</strong></dt>
+        <dd>{{ appointment.emr_id }}</dd>
+        <dt><strong>EMR Profile ID:</strong></dt>
+        <dd>{{ appointment.profile_id }}</dd>
+        <dt><strong>Comm Preference:</strong></dt>
+        <dd>{{ appointment.comm_pref }}</dd>
       </dl>
 
       <a class="btn btn-default" href="{% url 'list_appointments' %}">Back</a>
