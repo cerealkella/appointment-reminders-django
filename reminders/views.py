@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
@@ -11,8 +12,9 @@ from .models import Appointment
 
 class AppointmentListView(ListView):
     """Shows users a list of appointments"""
-
+    
     model = Appointment
+    queryset = model.objects.all().filter(created__date=datetime.date.today())
     ordering = ['-id']
 
 

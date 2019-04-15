@@ -58,7 +58,7 @@ def dictfetchall(days_in_advance):
 
 
 @register_job(
-    scheduler, "cron", hour="9,11,13,15,17", minute=20, replace_existing=True, jitter=20
+    scheduler, "cron", hour="8", minute=00, replace_existing=True, jitter=20
 )
 def populate_appt_database():
     """Specify the days in advance to send out reminders"""
