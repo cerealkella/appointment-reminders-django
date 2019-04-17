@@ -14,7 +14,7 @@ class AppointmentListView(ListView):
     """Shows users a list of appointments"""
     
     model = Appointment
-    queryset = model.objects.all().filter(created__date=datetime.date.today())
+    queryset = Appointment.objects.all().filter(created__date=datetime.date.today())
     ordering = ['-id']
 
 
