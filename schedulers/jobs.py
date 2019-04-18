@@ -89,6 +89,8 @@ def populate_appt_database():
                     print("Appointment in the past")
                 else:
                     a.save()
+    # Re-initialize ListView to filter by date
+    from reminders.views import AppointmentListView
 
 
 try:
