@@ -45,20 +45,21 @@ def dictfetchall(days_in_advance):
     ORDER  BY sch5appt_datetime
     """
     appt_date = str(datetime.date.today() + datetime.timedelta(days=days_in_advance))
+    results = {}
     try:
         cursor = connections["emr"].cursor()
         cursor.execute(sql.format("'" + appt_date + "'"))
         columns = [col[0] for col in cursor.description]
-        return [dict(zip(columns, row)) for row in cursor.fetchall()]
-        cursor.close()
+        results = [dict(zip(columns, row)) for row in cursor.fetchall()]
     except (InterfaceError, OperationalError) as e:
-        connection.close()
         print("{} - Connection unavailable, will try again later".format(e))
-        return {}
+    finally:
+        cursor.close()
+        return results
 
 
 @register_job(
-    scheduler, "cron", hour="8", minute=00, replace_existing=True, jitter=20
+    scheduler, "cron", hour="7", minute=55, replace_existing=True, jitter=20
 )
 def populate_appt_database():
     """Specify the days in advance to send out reminders"""
