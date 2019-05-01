@@ -30,8 +30,7 @@ def dictfetchall(days_in_advance):
     SELECT DISTINCT profile.prof_c_profilenum as profile_id,
                     prof_c_ip1firstname as name,
                     sch5event_contact_cell_phone as phone_number,
-                    'E' as comm_pref,
-                    /*prof_c_commpref as comm_pref,*/
+                    prof_c_commpref as comm_pref,
                     profile.prof_c_arpphone as home_phone,
     				profile.prof_c_ip1p_email as email,
                     sch5event_id as id,
@@ -41,7 +40,10 @@ def dictfetchall(days_in_advance):
              ON sch5appt_eventid = sch5event_id
            JOIN profile
              ON prof_c_profilenum = sch5event_profile
+           join (select * from scheduling_event_task where sch5evtks_seq = 1) as sch5evtask on sch5event_id = sch5evtks_event_id
+           join scheduling_task on sch5evtks_task_id = sch5task_id
     WHERE  Date(sch5appt_datetime) = {}
+    	   and sch5task_owner_dept in (34,47,60)
     ORDER  BY sch5appt_datetime
     """
     appt_date = str(datetime.date.today() + datetime.timedelta(days=days_in_advance))

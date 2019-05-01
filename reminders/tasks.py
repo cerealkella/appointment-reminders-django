@@ -111,7 +111,7 @@ def send_reminder(appointment_id):
 
     body = """\n
         {0}- Hello from {1}! You have an appointment coming up on {2} at {3}.
-        If you can't make it, please call {4} to reschedule.
+        Please call {4} if you need to reschedule. Don't forget your co-pay!
         """.format(
         appointment.name,
         ORGANIZATION["NAME"],
