@@ -79,18 +79,26 @@ def _send_email_reminder(appointment, body):
 def _make_phone_call(appointment):
     """Send a voice reminder to a phone using Twilio"""
 
+    if _valid_home_phone(appointment):
+        number_to_call = appointment.home_phone
+    elif _valid_cell(appointment):
+        number_to_call = appointment.phone_number
+    else:
+        print("No valid number to call")
+        return False
+
     client = Client()
     call = client.calls.create(
         url=ORGANIZATION["SITE_BASE_URL"]
         + "appointments/xml/{}/".format(appointment.id),
-        # to=appointment.home_phone,
+        # to=number_to_call,
         to=ORGANIZATION["TEST_HOME_PHONE"],
         # Outbound Caller ID, if different than TWILIO #, must be verified w/twilio
         # from_=settings.TWILIO_NUMBER,
         from_=ORGANIZATION['PHONE']
     )
     print(call.sid)
-    return call.sid
+    return True
 
 
 @dramatiq.actor(max_retries=5, min_backoff=20000, max_backoff=21600000)
@@ -155,7 +163,5 @@ def send_reminder(appointment_id):
         return False
 
     else:  # appointment.comm_pref == 'P'
-        if _valid_home_phone(appointment):
-            _make_phone_call(appointment)
-            return True
-        return False
+        # validity checking done in phone call function
+        return _make_phone_call(appointment)
