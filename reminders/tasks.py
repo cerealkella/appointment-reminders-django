@@ -69,9 +69,9 @@ def _send_email_reminder(appointment, body):
             EMAIL_SERVER_SETTINGS["USERNAME"], EMAIL_SERVER_SETTINGS["PASSWORD"]
         )
         result = server.sendmail(EMAIL_SERVER_SETTINGS['SENDER_EMAIL'], appointment.email, message)
-        #result = server.sendmail(
-        #    EMAIL_SERVER_SETTINGS["SENDER_EMAIL"], ORGANIZATION["TEST_EMAIL"], message
-        )
+        # result = server.sendmail(
+        #     EMAIL_SERVER_SETTINGS["SENDER_EMAIL"], ORGANIZATION["TEST_EMAIL"], message
+        # )
         server.close()
     return result
 
