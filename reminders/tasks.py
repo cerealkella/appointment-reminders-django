@@ -118,8 +118,8 @@ def send_reminder(appointment_id):
     appointment_time = utcappt.to(appointment.time_zone)
 
     body = """\n
-        {0}- Hello from {1}! You have an appointment coming up on {2} at {3}.
-        Please call {4} if you need to reschedule. Don't forget your co-pay!
+        {0}- Hello from {1}! You have an appt coming up on {2} at {3}.
+        Please call {4} if you need to reschedule. Arrive 15 min early & don't forget your co-pay!
         """.format(
         appointment.name,
         ORGANIZATION["NAME"],
