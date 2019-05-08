@@ -45,8 +45,8 @@ def _send_sms_reminder(appointment, body):
     """Send SMS to recipient"""
     client.messages.create(
         body=body,
-        # to=appointment.phone_number,
-        to=ORGANIZATION["TEST_CELL_NUMBER"],
+        to=appointment.phone_number,
+        # to=ORGANIZATION["TEST_CELL_NUMBER"],
         from_=settings.TWILIO_NUMBER,
     )
     return True
@@ -68,9 +68,9 @@ def _send_email_reminder(appointment, body):
         server.login(
             EMAIL_SERVER_SETTINGS["USERNAME"], EMAIL_SERVER_SETTINGS["PASSWORD"]
         )
-        # result = server.sendmail(EMAIL_SERVER_SETTINGS['SENDER_EMAIL'], appointment.email, message)
-        result = server.sendmail(
-            EMAIL_SERVER_SETTINGS["SENDER_EMAIL"], ORGANIZATION["TEST_EMAIL"], message
+        result = server.sendmail(EMAIL_SERVER_SETTINGS['SENDER_EMAIL'], appointment.email, message)
+        #result = server.sendmail(
+        #    EMAIL_SERVER_SETTINGS["SENDER_EMAIL"], ORGANIZATION["TEST_EMAIL"], message
         )
         server.close()
     return result
@@ -91,8 +91,8 @@ def _make_phone_call(appointment):
     call = client.calls.create(
         url=ORGANIZATION["SITE_BASE_URL"]
         + "appointments/xml/{}/".format(appointment.id),
-        # to=number_to_call,
-        to=ORGANIZATION["TEST_HOME_PHONE"],
+        to=number_to_call,
+        # to=ORGANIZATION["TEST_HOME_PHONE"],
         # Outbound Caller ID, if different than TWILIO #, must be verified w/twilio
         # from_=settings.TWILIO_NUMBER,
         from_=ORGANIZATION['PHONE']
