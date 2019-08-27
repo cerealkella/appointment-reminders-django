@@ -31,7 +31,7 @@ def dictfetchall(days_in_advance):
                     prof_c_ip1firstname as name,
                     sch5event_contact_cell_phone as phone_number,
                     prof_c_commpref as comm_pref,
-                    profile.prof_c_arpphone as home_phone,
+                    profile.prof_c_ip1p_phone as home_phone,
     				profile.prof_c_ip1p_email as email,
                     sch5event_id as id,
                     sch5appt_datetime as time
@@ -70,11 +70,11 @@ def dictfetchall(days_in_advance):
 
 
 @register_job(
-    scheduler, "cron", hour="7", minute=55, replace_existing=True, jitter=20
+    scheduler, "cron", hour="7", minute=45, replace_existing=True, jitter=20
 )
 def populate_appt_database():
     """Specify the days in advance to send out reminders"""
-    reminders = (1, 3)
+    reminders = (1)
     print("{} - Scraping Database for Appointments".format(datetime.datetime.now()))
     for i in reminders:
         rows = dictfetchall(i)
@@ -112,3 +112,4 @@ else:
     register_events(scheduler)
     scheduler.start()
     print("{0} - Scheduler started!".format(datetime.datetime.now()))
+

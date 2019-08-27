@@ -16,6 +16,10 @@ class AppointmentListView(ListView):
     model = Appointment
     ordering = ['-id']
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(created__date=datetime.date.today())
+
 
 class AppointmentDetailView(DetailView):
     """Shows users a single appointment"""
