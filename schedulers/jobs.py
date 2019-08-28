@@ -74,7 +74,7 @@ def dictfetchall(days_in_advance):
 )
 def populate_appt_database():
     """Specify the days in advance to send out reminders"""
-    reminders = (1)
+    reminders = (1,)
     print("{} - Scraping Database for Appointments".format(datetime.datetime.now()))
     for i in reminders:
         rows = dictfetchall(i)
