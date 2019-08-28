@@ -14,6 +14,7 @@ from .views import (
 urlpatterns = [
     # List and detail views
     path('appointments/', login_required(AppointmentListView.as_view(template_name="login_form.html")), name='list_appointments'),
+    path('appointments/scraper/', AppointmentListView.scraper),
     # Path for Appointment by Task ID
     path('xml/<pk>/', csrf_exempt(AppointmentUpdateView.as_view(template_name='twilio_call.xml')), name='view_appointment_xml'),
     #re_path(r'^$', AppointmentListView.as_view(), name='list_appointments'),

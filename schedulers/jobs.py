@@ -101,6 +101,7 @@ def populate_appt_database():
                     print("Appointment in the past")
                 else:
                     a.save()
+    return("Completed DB Scrape. {} Appointments found".format(len(rows)))
 
 
 try:

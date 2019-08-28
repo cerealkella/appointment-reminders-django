@@ -6,7 +6,9 @@ from django.views.generic.edit import CreateView
 from django.views.generic.edit import DeleteView
 from django.views.generic.edit import UpdateView
 from django.views.generic.list import ListView
+from django.shortcuts import render
 
+from schedulers.jobs import populate_appt_database
 from .models import Appointment
 
 
@@ -19,6 +21,12 @@ class AppointmentListView(ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         return queryset.filter(created__date=datetime.date.today())
+
+    def scraper(request):
+        if request.GET.get('scraper_btn'):
+            print("scrape button pressed, populating database")
+            result = populate_appt_database()
+        return render(request, 'scraper.html',{'value':result})
 
 
 class AppointmentDetailView(DetailView):
