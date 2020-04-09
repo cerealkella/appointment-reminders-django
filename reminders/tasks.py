@@ -136,6 +136,7 @@ def send_reminder(appointment_id):
             body += " Info & forms can be found here: {0}".format(
                 ORGANIZATION["WEB_RESOURCE"]
             )
+            body += "\nVideo visit? Install Signal Messenger: https://signal.org/install"
             _send_sms_reminder(appointment, body)
             return True
         elif _valid_email(appointment):
@@ -152,6 +153,10 @@ def send_reminder(appointment_id):
     elif appointment.comm_pref == "M":
         """Send SMS"""
         if _valid_cell(appointment):
+            body += " Information and forms can be found here: {0}".format(
+                ORGANIZATION["WEB_RESOURCE"]
+            )
+            body += "\nVideo visit? Install Signal Messenger: https://signal.org/install"
             _send_sms_reminder(appointment, body)
             return True
         return False
