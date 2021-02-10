@@ -51,8 +51,9 @@ def dictfetchall(days_in_advance):
            join (select max(sch5apptstat_id) as id, sch5apptstat_apptid from scheduling_appointment_status group by sch5apptstat_apptid) as ss on ss.sch5apptstat_apptid = sch5appt_id
            join scheduling_appointment_status on sch5apptstat_id = ss.id
     WHERE  Date(sch5appt_datetime) = {}
-    	   and sch5task_owner_dept in (34,47,49,31,50,51,55)
+    	   and sch5task_owner_dept in (34,47,49,50,51,55)
            and sch5apptstat_code = 'S'
+           and sch5appt_duration > 5
     ORDER  BY sch5appt_datetime
     """
     appt_date = str(datetime.date.today() + datetime.timedelta(days=days_in_advance))
