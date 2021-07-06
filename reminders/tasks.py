@@ -87,10 +87,27 @@ def _make_phone_call(appointment):
         print("No valid number to call")
         return False
 
+    # The appointment object is UTC when pulling from the database
+    # need to convert to the proper timezone using code below
+    utcappt = arrow.get(appointment.time)
+    appointment_time = utcappt.to(appointment.time_zone)
+
+    body = f""". . . Hello from {ORGANIZATION['NAME']}! {appointment.name} has an appointment coming up on
+        {appointment_time.format('M/D')} at {appointment_time.format('h:mm a')}.
+        Please call {ORGANIZATION['PHONE']} if you need to reschedule. We expect you here 15 min early to register,
+        and please don't forget your co-pay! . . . . ."""
+
+    message = ""
+    i = 0
+    while i < 3:
+        message += body
+        i += 1
+
     client = Client()
     call = client.calls.create(
-        url=ORGANIZATION["SITE_BASE_URL"]
-        + "appointments/xml/{}/".format(appointment.id),
+        # url=ORGANIZATION["SITE_BASE_URL"]
+        # + "appointments/xml/{}/".format(appointment.id),
+        twiml=f"""<Response><Say>{message}</Say></Response>""",
         to=number_to_call,
         # to=ORGANIZATION["TEST_HOME_PHONE"],
         # Outbound Caller ID, if different than TWILIO #, must be verified w/twilio
@@ -119,7 +136,7 @@ def send_reminder(appointment_id):
 
     body = """\n
         {0}- Hello from {1}! You have an appt coming up on {2} at {3}.
-        Please call {4} if you need to reschedule. Arrive 15 min early & don't forget your co-pay!
+        Please call {4} if you need to reschedule. Be here to register 15 min early & don't forget your co-pay!
         """.format(
         appointment.name,
         ORGANIZATION["NAME"],
