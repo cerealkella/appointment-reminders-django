@@ -5,14 +5,13 @@ import redis
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.urls import reverse
-from django.utils.encoding import python_2_unicode_compatible
+# from django.utils.encoding import python_2_unicode_compatible
 from timezone_field import TimeZoneField
 
 import arrow
 import random
 
 
-@python_2_unicode_compatible
 class Appointment(models.Model):
     name = models.CharField(max_length=150)
     phone_number = models.CharField(max_length=15, blank=True)
