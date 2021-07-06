@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>{% load staticfiles %}
+<?xml version="1.0" encoding="UTF-8"?>{% load static %}
 <Response>
   <Pause length="5"/>
   <Say voice="alice"> . </Say>
