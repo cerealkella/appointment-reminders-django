@@ -94,7 +94,7 @@ def _make_phone_call(appointment):
 
     body = f""". . . Hello from {ORGANIZATION['NAME']}! {appointment.name} has an appointment coming up on
         {appointment_time.format('M/D')} at {appointment_time.format('h:mm a')}.
-        Please call {ORGANIZATION['PHONE']} if you need to reschedule. We expect you here 15 min early to register,
+        Please call {ORGANIZATION['PHONE']} if you need to reschedule. Please arrive 15 min early to register,
         and please don't forget your co-pay! . . . . ."""
 
     message = ""
