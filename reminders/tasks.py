@@ -95,7 +95,7 @@ def _make_phone_call(appointment):
     body = f""". . . Hello from {ORGANIZATION['NAME']}! {appointment.name} has an appointment coming up on
         {appointment_time.format('M/D')} at {appointment_time.format('h:mm a')}.
         Please call {ORGANIZATION['PHONE']} if you need to reschedule. Please arrive 15 min early to register,
-        and please don't forget to bring your home meds and your co-pay! . . . . ."""
+        and please don't forget to bring any medications you may be taking, and your co-pay! . . . . ."""
 
     message = ""
     i = 0
