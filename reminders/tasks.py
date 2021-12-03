@@ -135,9 +135,9 @@ def send_reminder(appointment_id):
     appointment_time = utcappt.to(appointment.time_zone)
 
     body = """\n
-        {0}- Hello from {1}! You have an appt coming up on {2} at {3}.
-        Please call {4} if you need to reschedule. Be here to register 15 min early & don't forget your home meds & co-pay!
-        """.format(
+        {0}- Hello from {1}! You have an appt coming up on {2} at {3}. 
+Please call {4} if you need to reschedule. Be here to register 15 min early & don't forget your home meds & co-pay!
+""".format(
         appointment.name,
         ORGANIZATION["NAME"],
         appointment_time.format("M/D"),
@@ -169,7 +169,7 @@ def send_reminder(appointment_id):
     elif appointment.comm_pref == "M":
         """Send SMS"""
         if _valid_cell(appointment):
-            body += " Information and forms can be found here: {0}".format(
+            body += " Info & forms can be found here: {0}".format(
                 ORGANIZATION["WEB_RESOURCE"]
             )
             _send_sms_reminder(appointment, body)
