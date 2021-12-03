@@ -95,7 +95,7 @@ def _make_phone_call(appointment):
     body = f""". . . Hello from {ORGANIZATION['NAME']}! {appointment.name} has an appointment coming up on
         {appointment_time.format('M/D')} at {appointment_time.format('h:mm a')}.
         Please call {ORGANIZATION['PHONE']} if you need to reschedule. Please arrive 15 min early to register,
-        and please don't forget your co-pay! . . . . ."""
+        and please don't forget to bring your home meds and your co-pay! . . . . ."""
 
     message = ""
     i = 0
@@ -136,7 +136,7 @@ def send_reminder(appointment_id):
 
     body = """\n
         {0}- Hello from {1}! You have an appt coming up on {2} at {3}.
-        Please call {4} if you need to reschedule. Be here to register 15 min early & don't forget your co-pay!
+        Please call {4} if you need to reschedule. Be here to register 15 min early & don't forget your home meds & co-pay!
         """.format(
         appointment.name,
         ORGANIZATION["NAME"],
